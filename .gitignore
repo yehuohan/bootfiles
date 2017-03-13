@@ -1,0 +1,9 @@
+
+# USBBootFils
+# Only track the files related to boot files.
+
+/iso/
+/tools/
+/MyDocument.exe
+/MyDocuments
+

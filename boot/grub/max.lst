@@ -1,0 +1,125 @@
+﻿find --set-root /BOOT/GRUB/submenu.lst
+
+title 返回 \n
+configfile ()/boot/grub/submenu.lst
+
+title ghost参数设置 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=sdcs
+
+title ghost手动操作 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=hand
+
+title 手动克隆 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=ghost
+
+title image备份还原 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=image
+
+title ghost网络克隆 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=nett
+
+title 搜索镜像文件 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=sgho
+
+title 查看镜像密码 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=gw
+
+title 全盘克隆 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=cphd
+
+title DG分区工具 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=diskgen
+
+title aefdisk分区 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=aefd
+
+title gdisk分区工具 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=gdt
+
+title DM分区工具 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=dm
+
+title PQ-805分区 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=pq
+
+title Spfdisk分区工具 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=spf
+
+title F32分区工具 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=f32
+
+title MHDD坏道检测 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=mhdd
+
+title 硬盘再生器 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=hddreg
+
+title NT5/NT6的MBR \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=mbrt
+
+title Chkdsk磁盘检查 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=chkdsk
+
+title 还原卡破解 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=cr
+
+title 硬盘控制器驱动 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=hdm
+
+title CDROM驱动 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=cdm
+
+title USB驱动 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=usbm
+
+title 开启长名支持 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=chang
+
+title 卸载靠后光驱 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=uncd
+
+title 清理盘符 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=kildrv
+
+title 弹出光驱 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=ej
+
+title Grub加载ISO \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=2grub
+
+title Shsucdx加载ISO \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=iso
+
+title Zip打包工具 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=szmenu
+
+title NHex文件编辑 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=ne
+
+title 清除系统密码 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=pas
+
+title 绕过系统密码 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=kon
+
+title AWK简单计算器 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=jsq
+
+title PP截图工具 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=pp
+
+title 内存测试 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=memtest
+
+title CMOS工具 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=cmos
+
+title 天汇中文系统 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=tw
+
+title 命令行模式 \n
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool=m
+
+title 命令行模式 \n 传递参数：test
+command siso max_mem=/boot/grub/imgs/maxdos9.img tool="m   test"
+

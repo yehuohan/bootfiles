@@ -1,0 +1,33 @@
+find --set-root /BOOT/GRUB/submenu.lst
+
+title Return \n
+configfile ()/boot/grub/submenu.lst
+
+
+title Search and Boot ext_iso \n 从外置镜像(/ext_iso)启动安装程序
+set showpath=1
+set showdir=0
+#set slient=1
+command SISO RUN --noload --autolist-all show.iso subdir=2 /ext_iso/ --end exit
+command SISO ISO=%fileroot%%filename% FDA=--UATA FDB=firax86 sif=y  boot=cd e820=3
+
+
+title Install windows10 \n
+command SISO ISO=/iso/win10/ FDA=--UATA FDB=firax86 sif=y  boot=cd e820=3
+
+
+title Install windows8.1 \n 使SISO加载，可以选择不同加载方式
+# command SISO ISO=/iso/win81x64/ FDA="dpms ()/boot/grub/srs/dpms.gz" FDB=firax86 sif=y boot=cd e820=3
+# command SISO ISO=/iso/win81x64/ FDA="f6img ()/boot/grub/srs/f6img.iso" FDB=firax86 sif=y boot=cd e820=3
+# command SISO ISO=/iso/win81x64/ FDA="srsf6n ()/boot/grub/srs/srsf6n.lzma" FDB=firax86 sif=y  boot=cd e820=3
+# command SISO ISO=/iso/win81x64/ FDA=--UATA FDB=firax86 sif=y  boot=cd e820=3
+command SISO ISO=/iso/win81x64/ FDB=vbootxp boot=cd swap=y
+
+
+title Install windows7 sp1 x64 ultimate \n
+command SISO ISO=/iso/win7x64/ FDA="dpms ()/boot/grub/srs/dpms.gz" FDB=firax86 sif=y boot=cd e820=3 
+
+
+title Install windows7 sp1 x86 ultimate \n
+command SISO ISO=/iso/win7x86/ FDA="dpms ()/boot/grub/srs/dpms.gz" FDB=firax86 sif=y boot=cd e820=3
+

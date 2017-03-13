@@ -1,0 +1,65 @@
+﻿### made by yehuohan
+
+find --set-root /BOOT/GRUB/submenu.lst
+
+### Display
+graphicsmode -1 320:1366 100:1000 24:32 || graphicsmode -1 -1 -1 24:32
+splashimage /boot/grub/bg.bmp
+color normal=0x03 highlight=0x04 helptext=0x0A heading=0x0F standard=0x0F border=0x00
+font /boot/grub/font.hex
+# 屏蔽版本信息
+call Fn.0 0x40000 "!BAT\necho -P:0000 $[0000]\t\t\t\t\t\t\t\t\t\0" && initscript (md)0x200+1
+
+#MENUSETTING [字间距] [行间距] [边框宽度] [注释行起始行数] [菜单可显示最多行数] [菜单行起始行数] [菜单行宽度] [菜单行起始列数]
+MenuSetting 1 6 0 n 12 9 80 48
+hotkey -nb
+
+timeout -1
+default 0
+
+### titles
+
+title [0] Start Win81PE pure X86 \n 从(ISO)镜像启动PE
+find --set-root /iso/win8pe/Win81PePureX86.iso
+map /iso/win8pe/Win81PePureX86.iso (0xff) || map --mem /iso/win8pe/Win81PePureX86.iso (0xff) 
+map --hook
+chainloader (0xff) 
+
+title     Start WinOs and RamosPe \n 从分区wos中启动PE和Windows安装程序
+find --set-root /winosbootmgr
+chainloader /winosbootmgr
+
+
+title [1] Install windows \n 从(ISO)镜像启动Windows安装程序
+configfile ()/boot/grub/win.lst
+
+
+title [2] Install ubuntu16.04 Lts \n
+configfile ()/boot/grub/ubuntu.lst
+
+
+title [3] Install kali-201601-amd64 \n
+configfile ()/boot/grub/kali.lst
+
+
+title [4] Install little Linux \n
+configfile ()/boot/grub/littleLinux.lst
+
+
+title [5] start MAXDOS9 \n
+configfile ()/boot/grub/max.lst
+
+
+title [7] Start winly \n 使用winly引导
+find --set-root /winly.iso
+map --mem /winly.iso (0xff)
+map --hook
+chainloader (0xff)
+
+
+title [R] Reboot \n 重启
+reboot
+
+title [H] Halt \n 关闭计算机
+halt
+

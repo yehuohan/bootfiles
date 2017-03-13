@@ -1,0 +1,4 @@
+﻿###made by yehuoang
+
+# config load menu
+configfile /boot/grub/submenu.lst

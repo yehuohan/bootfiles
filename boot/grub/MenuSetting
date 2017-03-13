@@ -1,0 +1,211 @@
+!BAT
+::usage: menusetting space_w space_l border_w box_b box_h box_y box_w box_x vert horiz
+::vbe mode default value: menusetting 0 0 2 0 0 2 0 2 e f
+if "%~1"=="" && goto :help
+setlocal
+goto :%~1 > nul || echo -n
+::设置菜单显示相关
+::获取各参数，10进制的转换为16进制
+if /i "%~1"=="n" || set /a space_w=%~1 > nul
+if "%~2"=="" || if /i "%~2"=="n" || set /a space_l=%~2 > nul
+if "%~3"=="" || if /i "%~3"=="n" || set /A bde_w=%~3 > nul
+if "%~4"=="" || if /i "%~4"=="n" || set /A box_b=%~4 > nul
+if "%~5"=="" || if /i "%~5"=="n" || set /A box_h=%~5 > nul
+if "%~6"=="" || if /i "%~6"=="n" || set /A box_y=%~6 > nul
+if "%~7"=="" || if /i "%~7"=="n" || set /A box_w=%~7 > nul
+if "%~8"=="" || if /i "%~8"=="n" || set /A box_x=%~8 > nul
+::if "%~7"=="" || if /i "%~7"=="n" || set /A vert=%~7 > nul
+::if "%~8"=="" || if /i "%~8"=="n" || set /A horiz=%~8 > nul
+:begin
+::设置字间距和行间距
+if "%space_w%"=="" && if "%space_l%"=="" || set spacing=0:%space_l%
+if "%space_w%"=="" || if "%space_l%"=="" set spacing=%space_w% || set spacing=%space_w%:%space_l%
+if "%spacing%"=="" || terminal --font-spacing=%spacing%
+::处理参数，去掉0x，不足两位的用0补足
+set bde_w=%bde_w:~2%
+if "%bde_w%"=="" || if "%@retval%"=="1" set bde_w=0%bde_w%
+set box_b=%box_b:~2%
+if "%box_b%"=="" || if "%@retval%"=="1" set box_b=0%box_b%
+set box_h=%box_h:~2%
+if "%box_h%"=="" || if "%@retval%"=="1" set box_h=0%box_h%
+set box_y=%box_y:~2%
+if "%box_y%"=="" || if "%@retval%"=="1" set box_y=0%box_y%
+set box_w=%box_w:~2%
+if "%box_w%"=="" || if "%@retval%"=="1" set box_w=0%box_w%
+set box_x=%box_x:~2%
+if "%box_x%"=="" || if "%@retval%"=="1" set box_x=0%box_x%
+::set vert=%vert:~2%
+::if "%vert%"=="" || if "%@retval%"=="1" set vert=0%vert%
+::set horiz=%horiz:~2%
+::if "%horiz%"=="" || if "%@retval%"=="1" set horiz=0%horiz%
+::获取 border_w box_b box_h box_y 原值
+::获取menu_border指针的数据
+calc 29<<2+*0x8304 > nul
+::解开指针+8得到的是指向box_y的开始处内存
+calc *%@retval%+8 > nul
+::分析得到的结果，分别赋值
+read %@retval% | echo -n | echo -n | echo -n | set old=
+set old=%old:~2%
+set old=%old:~,-2% && set box_yo=%old:~-2%
+if "%box_yo%"=="" || if "%@retval%"=="1" set box_yo=0%box_yo% ! set box_yo=00
+set old=%old:~,-2% && set box_ho=%old:~-2%
+if "%box_ho%"=="" || if "%@retval%"=="1" set box_ho=0%box_ho% ! set box_ho=00
+set old=%old:~,-2% && set box_bo=%old:~-2%
+if "%box_bo%"=="" || if "%@retval%"=="1" set box_bo=0%box_bo% ! set box_bo=00
+set old=%old:~,-2% && set bde_wo=%old:~-2%
+if "%bde_wo%"=="" || if "%@retval%"=="1" set bde_wo=0%bde_wo% ! set bde_wo=00
+set old=
+::获取 box_w box_x vert horiz 原值
+calc 29<<2+*0x8304 > nul
+::解开指针+4得到的是指向horiz的开始处内存
+calc *%@retval%+4 > nul
+read %@retval% | echo -n | echo -n | echo -n | set old=
+set old=%old:~2%
+set old=%old:~,-2% && set horizo=%old:~-2%
+if "%horizo%"=="" || if "%@retval%"=="1" set horizo=0%horizo% ! set horizo=00
+set old=%old:~,-2% && set verto=%old:~-2%
+if "%verto%"=="" || if "%@retval%"=="1" set verto=0%verto% ! set verto=00
+set old=%old:~,-2% && set box_xo=%old:~-2%
+if "%box_xo%"=="" || if "%@retval%"=="1" set box_xo=0%box_xo% ! set box_xo=00
+set old=%old:~,-2% && set box_wo=%old:~-2%
+if "%box_wo%"=="" || if "%@retval%"=="1" set box_wo=0%box_wo% ! set box_wo=00
+::简单校验部分参数是否合理
+debug status | echo -n | echo -n | echo -n | echo -n | set debug=
+debug 1
+terminal | call :terminal 
+debug %debug%
+::准备写入新值，没有指定的话用原值替代
+if "%bde_w%"=="" && set bde_w=%bde_wo%
+if "%box_b%"=="" && set box_b=%box_bo%
+if "%box_h%"=="" && set box_h=%box_ho%
+if "%box_y%"=="" && set box_y=%box_yo%
+if "%box_w%"=="" && set box_w=%box_wo%
+if "%box_x%"=="" && set box_x=%box_xo%
+if "%vert%"=="" && set vert=%verto%
+if "%horiz%"=="" && set horiz=%horizo%
+::若菜单行宽度为0，则菜单行起始列数不能超过3
+if "%box_w%"=="00" && set box_x=02
+if "%box_wm%"=="" || if 0x%box_w%>=0x%box_wm% && set box_w=%box_wm%
+::写入后四个参数
+calc 29<<2+*0x8304 > nul
+calc *%@retval%+4 > nul
+calc *%@retval%=0x%box_w%%%box_x%%%vert%%%horiz% > nul
+::写入前四个参数
+calc 29<<2+*0x8304 > nul
+calc *%@retval%+8 > nul
+calc *%@retval%=0x%bde_w%%%box_b%%%box_h%%%box_y% > nul
+exit
+
+:help
+read 0x1800820 > nul || goto :help_en
+echo -e \n格式：MENUSETTING [字间距] [行间距] [边框宽度] [注释行起始行数]
+echo -e \x20     [菜单可显示最多行数] [菜单行起始行数] [菜单行宽度] [菜单行起始列数]
+echo -e \x20 参数可以使用 n 做占位符，保持原值不变
+echo -e \n或：MENUSETTING menusetting_state=[value] [..]
+echo -e \x20 其中 menusetting_state 字符串可以如下
+echo -e \x20 word-spacing  字间距
+echo -e \x20 line-spacing  行间距
+echo -e \x20 border-width  边框宽度
+echo -e \x20 comment-line  注释行起始行数
+echo -e \x20 menu-max      菜单可显示最多行数
+echo -e \x20 menu-line     菜单行起始行数
+echo -e \x20 menu-width    菜单行宽度
+echo -e \x20 menu-column   菜单行起始列数
+echo -e \n固定用法： MENUSETTING u  #恢复GRUB4DOS默认设置
+exit
+:help_en
+echo -e \nUsage: MENUSETTING [Word Spacing] [Line Spacing] [Border Width]
+echo -e \x20      [Comment Starting Line] [Max Num. of Menu Bar] [Menu Starting Line]
+echo -e \x20      [Menu Width] [Menu Starting Column]
+echo -e \x20 Parameters can ues "n" as placeholder to keep the original value unchanged
+echo -e \nOR：MENUSETTING menusetting_state=[value] [..]
+echo -e \x20 String which can be used as menusetting_state
+echo -e \x20 word-spacing  #Word Spacing
+echo -e \x20 line-spacing  #Line Spacing
+echo -e \x20 border-width  #Border Width
+echo -e \x20 comment-line  #Comment Starting Line
+echo -e \x20 menu-max      #Max Num. of Menu Bar
+echo -e \x20 menu-line     #Menu Starting Line
+echo -e \x20 menu-width    #Menu Width
+echo -e \x20 menu-column   #Menu Starting Column
+echo -e \nFixed usage : MENUSETTING u #Restore GRUB4DOS default settings
+
+exit
+
+:terminal
+::获取参数当前允许的最大值，第三个参数为每行最多英文字符数，第五个参数为最大行数
+if not "%~3"=="" if not "%~5"=="" || exit
+set /A charm=%~3 > nul
+set charm=%charm:~2%
+if "%@retval%"=="1" set charm=0%charm%
+set /A linem=%~5 > nul
+set linem=%linem:~2%
+if "%@retval%"=="1" set linem=0%linem%
+::注释行不超过最大行数
+if "%box_b%"=="" || if 0x%box_b%>=0x%linem% && set box_b=%linem%
+::可显示最多行数不超过最大行数，不超过注释行起始行数
+if "%box_h%"=="" || if 0x%box_h%>=0x%linem% && set box_h=%linem%
+if "%box_h%"=="" || if "%box_b%"=="" || if "%box_b%"=="00" || if 0x%box_h%>=0x%box_b% && set box_h=%box_b%
+::菜单起始行数不超过最大行数，不超过注释行起始行数
+::if "%box_y%"=="0m" && if "%box_h%"=="" || if 0x%box_y%>=0x%linem% && set box_y=%linem%
+if "%box_y%"=="" || if 0x%box_y%>=0x%linem% && set box_y=%linem%
+if "%box_y%"=="" || if "%box_b%"=="" || if "%box_b%"=="00" || if 0x%box_y%>=0x%box_b% && set box_y=%box_b%
+::菜单行宽度不超过每行最多字符数，否则将重置为0，0为默认最大宽度
+if "%box_w%"=="" || if 0x%box_w%>=0x%charm% && set box_w=00
+::检测菜单行起始列数
+if "%box_x%"=="" && exit
+set /A char1=0x%charm% - 0x3 > nul
+set char1=%char1:~2%
+if "%char1%"=="" || if "%@retval%"=="1" set char1=0%char1%
+set /A char2=0x%charm% - 0x1 - 0x%box_x% > nul
+set char2=%char2:~2%
+if "%@retval%"=="1" set char2=0%char2%
+::为负数时
+if "%char2:~,2%"=="FF" && set box_x=02 && exit
+::为0时
+if "%char2%"=="00" && set box_x=02 && exit
+::0或1，宽度可用00或最大值减3
+if 0x%box_x%<=0x1 && if "%box_w%"=="" set box_wm=%char1% || if "%box_w%"=="00" || if 0x%box_w%>=0x%char1% && set box_w=%char1%
+::2以上，宽度不能为0，最大为最大值减列数再减1
+if 0x%box_x%>=0x2 && if "%box_w%"=="" set box_wm=%char2% || if "%box_w%"=="00" set box_w=%char2% || if 0x%box_w%>=0x%char2% && set box_w=%char2%
+exit
+
+:u
+call %~0 0 0 2 0 0 2 0 2
+exit
+
+:word-spacing
+shift && set /a space_w=%~2 > nul
+shift && if "%~2"=="" || goto :%~2 > nul || goto :err ! goto :begin
+
+:line-spacing
+shift && set /a space_l=%~2 > nul
+shift && if "%~2"=="" || goto :%~2 > nul || goto :err ! goto :begin
+
+:border-width
+shift && set /A bde_w=%~2 > nul
+shift && if "%~2"=="" || goto :%~2 > nul || goto :err ! goto :begin
+
+:comment-line
+shift && set /A box_b=%~2 > nul
+shift && if "%~2"=="" || goto :%~2 > nul || goto :err ! goto :begin
+
+:menu-max
+shift && set /A box_h=%~2 > nul
+shift && if "%~2"=="" || goto :%~2 > nul || goto :err ! goto :begin
+
+:menu-line
+shift && set /A box_y=%~2 > nul
+shift && if "%~2"=="" || goto :%~2 > nul || goto :err ! goto :begin
+
+:menu-width
+shift && set /A box_w=%~2 > nul
+shift && if "%~2"=="" || goto :%~2 > nul || goto :err ! goto :begin
+
+:menu-column
+shift && set /A box_x=%~2 > nul
+shift && if "%~2"=="" || goto :%~2 > nul || goto :err ! goto :begin
+
+:err
+echo Error: %~1
+shift && if "%~2"=="" || goto :%~2 > nul || goto :err ! goto :begin

@@ -1,0 +1,18 @@
+find --set-root /BOOT/GRUB/submenu.lst
+
+title Return \n
+configfile ()/boot/grub/submenu.lst
+
+
+// u≈Ã‘À––slax
+title Start slax \n
+find --set-root /iso/slax/slax-Chinese-Simplified-7.0.8-x86_64.iso
+kernel /iso/slax/vmlinuz from=/iso/slax/slax-Chinese-Simplified-7.0.8-x86_64.iso load_ramdisk=1 prompt_ramdisk=0 rw printk.time=0 slax.flags=perch,xmode locale=zh_CN.UTF-8
+initrd /iso/slax/initrfs.img
+
+
+title Start Tiny Core Linux \n change the root passwd by sudo first
+find --set-root /iso/TinyCore/TinyCore-current.iso
+map --mem /iso/TinyCore/TinyCore-current.iso (0xff)
+map --hook
+chainloader (0xff)

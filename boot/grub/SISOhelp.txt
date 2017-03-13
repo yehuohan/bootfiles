@@ -1,0 +1,228 @@
+
+注释：所有命令不区分大小写。
+      不带任何参数，直接进入SISO命令行。
+      以下的MAX均可以改为MAX_MEM。ISO均可改为ISO_MEM，解释同MAX。
+      MAX：先直接映射，失败再加载到内存。
+      MAX_MEM：强制加载到内存。
+      以下所有用法均在模板中体现，请举一反三。
+      模板下载：http://yun.baidu.com/share/link?shareid=2369780121&uk=2098012847
+      本人网盘，有惊喜：http://yun.baidu.com/share/link?shareid=3269092721&uk=2098012847
+
+
+
+
+
+
+加载ISO安装系统：
+
+SISO     ISO=参数1      FDA=参数2       FDB=参数3       SIF=参数4         ADDONS=参数5         E820=参数6         SWAP=参数7          BOOT=参数8      FD2HD=参数9     SN=参数10
+
+          注释：
+				参数1，ISO路径，可以是一个文件，也可以是一个列表。路径可带空格，请使用双引号，如：ISO="/a  b/c    d/xp.iso"
+                参数2，加载到A盘的镜像，可以是自制IMG镜像，也可以是内置于SISO的命令（F6IMG、DPMS、SRSF6N）。
+                       支持的驱动包格式有：散开方式、GZ、LZMA、ISO、IMG、IMA。
+                       如：FDA=/SRS/SRS.IMG。路径可带空格，请使用双引号，如：FDA="/a  b/c    d/SRS.IMG"
+                           fda="f6img  /srs/"
+                           fda="dpms  ()/srs/dpms-srs.gz"
+                       fda=--UATA    表示加载内置的万能驱动(uniata.sys)
+                参数3，加载到B盘的镜像，可以是自制IMG镜像，也可以是内置于SISO内的镜像（FIRA、FIRAX86、FIRAX64、WVBLK、WVBLKX86、WVBLKX64、VBOOT、VBOOTX64、VBOOTXP、VBOOT2K、VBOOT2K3）。
+                       如：FDB=FIRAX86。如果是自制IMG镜像，路径可带空格，请使用双引号，如：FDB="/a  b/c    d/SRS.IMG"
+                参数4，自动应答文件路径。也可以使用内置于SISO内的自动应答文件（SIF=Y）。路径可带空格，请使用双引号，如：SIF="/a  b/c    d/WINXP.SIF"
+                参数5，可以加载一段自制批处理。如：ADDONS="FD2HD --ABC"
+                参数6，防蓝屏参数。
+                参数7，静默交换第1、2硬盘。如：SWAP=Y。
+                参数8，指定启动设备，省略BOOT参数则默认从ISO启动。如：BOOT=CD（从ISO启动）、BOOT=HD（从硬盘启动）、BOOT=N（保存已加载的镜像并返回主菜单）。
+                参数9，FD2HD=Y或FD2HD=N，为Y或省略此参数时，表示启动设备被识别成ZIP的时候，将启动设备映射为HDD。
+                参数10，示例：SN=MRX3F-47B9T-2487J-KWKMF-RPWBY。指定序列号。
+                所有参数均可省略，位置可互换。如：SISO   FDA=/A.IMG   BOOT=CD 也可写成 SISO   BOOT=CD   FDA=/A.IMG。
+                假如不带ISO参数，加载完驱动后将返回主菜单。
+                B盘使用VBOOT时，SISO不会加载ISO，而是由VBOOT来完成，不会加载到内存，也可存在碎片。如：SISO  ISO=/WIN7.ISO  FDB=VBOOTXP  SWAP=Y
+                可以搜索硬盘上的所有系统，并启动。如：SISO   BOOT=HD。
+                SISO主帖：http://bbs.wuyou.com/forum.php?mod=viewthread&tid=205934&extra=page%3D1
+
+
+
+
+
+
+
+
+
+
+
+
+利用WIMBOOT启动WIM系统
+
+SISO    WIMBOOT=参数1     BOOTMGR=参数2       BCD=参数3       BOOT.SDI=参数4       E820CYCLE=参数5       BOOT.WIM=参数6
+
+       注释：参数1，WIMBOOT路径，省略此参数时使用内置WIMBOOT。
+             参数2，BOOTMGR路径，省略此参数时使用内置BOOTMGR。
+             参数3，BCD路径，省略此参数时使用内置BCD。
+             参数4，BOOT.SDI路径，省略此参数时使用内置BOOT.SDI。
+             参数5，防蓝屏参数。
+             参数6，WIM文件路径。
+             所有参数位置可互换，参数1~5均可省略。
+
+
+
+
+
+
+
+
+
+
+
+
+直接调用MAXDOS内部工具（只适用于本人增强的MAXDOS）：
+
+SISO    MAX=参数1      MODE=参数2      TOOL=参数3       HD=参数4        GHO=参数5         T=参数6       PW=参数7
+
+       注释：参数1，MAXDOS路径，如/BOOT/IMGS/MAXDOS9.IMG。路径可带空格，请使用双引号，如：MAX="/a  b/c    d/MAXDOS.IMG"
+             参数2，MAXDOS内存模式，范围为：A~L。如：MODE=C。
+             参数3，MAXDOS内部工具，如：TOOL=DISKGEN。
+             参数4，备份或还原的目标分区，如：HD=(hd0,0)。其中，(hd0,0)~(hd0,3)表示第一硬盘第1~4主分区，(hd0,4)(或以上)表示第一硬盘第1扩展分区(或以上)。
+                    省略HD参数则默认(hd0,0)
+             参数5，镜像路径，可以是一个镜像，也可以是一个列表。只支持对GHO、GGH、MAX、JEX 这4种扩展名的文件列表。
+                    省略GHO参数则默认最后一个分区的\wingho..\sys.ggh（由MAXDOS.IMG设定）。路径可带空格，请使用双引号，如：GHO="/a  b/c    d/SYS.GHO"
+             参数6，备份还原模式的倒计时。T=NOTips 表示备份还原界面不会有任何提示窗口。
+             参数7，设定备份还原结束后，重启还是关机。省略PW参数则保持默认（重启）。如：PW=OFF(关机)、PW=RB（重启）。
+             参数2~7均可省略，位置可互换。
+             MAXDOS下载：
+             http://yun.baidu.com/share/link?shareid=2413612970&uk=2098012847
+
+
+
+
+
+
+
+
+
+
+
+
+启动PE镜像或IMG镜像：
+
+SISO    MAX=参数1    FDB=参数2     E820=参数3
+
+      注释：参数1，镜像路径，可以是一个文件，也可以是一个列表，如/BOOT/PE.ISO  或/BOOT/IMGS/。路径可带空格，请使用双引号，如：MAX="/a  b/c    d/PE.ISO"
+            参数2，加载到B盘的内置镜像，有：FIRA、FIRAX86、FIRAX64、WVBLK、WVBLKX86、WVBLKX64、VBOOT、VBOOTX64、VBOOTXP、VBOOT2K、VBOOT2K3。如 FDB=FIRA。
+            参数3，防蓝屏参数。
+            其中，参数2和参数3可以省略，位置可以互换。
+            镜像可以压缩，不管是GZIP还是LZMA，程序都可以自动判断包内的镜像，并选择合适
+            的方式启动。（方法有点特别，不管是ISO伪装的IMG镜像，还是改单纯的改扩展名，都能正确判断）
+
+
+
+
+
+
+
+
+
+
+内置NTBOOT模块：
+
+SISO    NTBOOT=NTBOOT所有参数
+
+         注释：直接使用命令  SISO   NTBOOT 可进入NTBOOT菜单
+               内置本人修改版的NTBOOT。可自定义防蓝屏参数。
+               本人修改版NTBOOT下载地址：
+               http://yun.baidu.com/share/link?shareid=3149272027&uk=2098012847
+               原版NTBOOT下载：
+               http://bbs.wuyou.com/forum.php?mod=viewthread&tid=190203
+               http://chenall.net/post/ntboot/
+
+          内置RUN模块，可自动列表：
+
+title 自动列表VHD并启动，根目录
+set showpath=1
+set showdir=0
+set slient=1
+command siso run --noload --autolist-all show.vhd subdir=1 --end exit
+command siso ntboot NT6=%fileroot%%%filename%
+
+title 自动列表VHD并启动，VHDS目录
+set showpath=1
+set showdir=0
+set slient=1
+command siso run --noload --autolist-all show.vhd /vhds/ --end exit
+command siso ntboot NT6=%fileroot%%%filename%
+
+title 自动列表VHD并启动，搜索VHDS内3层目录
+set showpath=1
+set showdir=0
+set slient=1
+command siso run --noload --autolist-all show.vhd subdir=3 /vhds/ --end exit
+command siso ntboot NT6=%fileroot%%%filename%
+
+title 自动列表VHD并启动，VHDS目录(此菜单仅限VHD使用)
+set showpath=1
+set showdir=0
+set slient=1
+command siso run --autolist-all show.vhd /vhds/
+
+
+
+
+
+
+
+
+
+
+
+内置S版RUN模块：
+
+SISO    RUN=RUN所有参数
+
+            注释：直接使用命令  SISO   RUN 可进入RUN命令行。
+                  RUN帖子地址：
+                  http://bbs.wuyou.com/forum.php?mod=viewthread&tid=191301&extra=page%3D1
+
+                  本人增加了对VHD、VHDX列表并启动的功能，例：
+
+title 检索所有设备根目录的.abc和.xyz文件（任意扩展名），自动列表 \n自动返回，输出变量fileroot和filename
+command siso run --noload --autolist-all show.abc.xyz subdir=1 --end exit
+
+title 检索所有设备根目录的.abc和.xyz文件（任意扩展名），自动列表 \n自动返回，输出变量fileroot和filename \n找不到或只找到一个文件时，自动退出RUN命令行，静默返回
+set slient=1
+command siso run --noload --autolist-all show.abc.xyz subdir=1 --end exit
+
+title 检索所有设备"/i  s   o    s/"目录的.abc和.xyz文件（任意扩展名），自动列表 \n自动返回，输出变量fileroot和filename \n不显示文件夹，显示全路径
+set showpath=1
+set showdir=0
+command siso run --noload --autolist-all show.abc.xyz "/i  s   o    s/" --end exit
+
+title 将列出所有设备下/VHDS/目录中指定文件类型的文件（菜单形式） \n将只显示VHD、VHDX文件
+command siso run --automenu-all show.vhd.vhdx /vhds/
+
+title 将列出所有设备下/VHDS/目录中指定文件类型的文件（列表形式） \n将只显示VHD、VHDX文件
+command siso run --autolist-all show.vhd.vhdx /vhds/
+
+title 将列出所有设备下/VHDS/目录中指定文件类型的文件（列表形式） \n将只显示VHD、VHDX文件 \n搜索VHDS内3层目录
+command siso run --autolist-all show.vhd.vhdx subdir=3 /vhds/
+
+title 将列出所有设备下/VHDS/目录中指定文件类型的文件（列表形式） \n将只显示VHD、VHDX文件 \n选择文件后退出，输出变量fileroot和filename
+command siso run --noload --autolist-all show.vhd.vhdx /vhds/ --end exit
+
+
+
+
+
+
+
+
+
+
+
+
+内置Z版RUN模块：
+
+SISO    RUNZ=RUN所有参数
+
+         注释：直接使用命令  SISO   RUNZ 可进入RUN命令行。
+               RUN帖子地址：
+               http://bbs.wuyou.com/forum.php?mod=viewthread&tid=183722
+               本人添加了一个防蓝屏参数，如：siso runz="--e820cycles=3 /PE.ISO"
