@@ -52,7 +52,7 @@ clover   : used in mac. (google or baidu for more)
 
 
 ---
-# Issues 
+# FAQ
  * Set default option to bios if there is no boot items.
 
 
@@ -134,7 +134,7 @@ clover   : 用于(黑)苹果使用。
 
 
 ---
-# 问题
+# 常见问题
  * 如果bios没有启动项，重设bios。
 
 
