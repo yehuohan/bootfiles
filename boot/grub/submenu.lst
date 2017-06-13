@@ -38,19 +38,30 @@ title [2] Install ubuntu16.04 Lts \n
 configfile ()/boot/grub/ubuntu.lst
 
 
-title [3] Install kali-201601-amd64 \n
+title [3] Install arch-linux \n
+configfile ()/boot/grub/arch.lst
+
+
+title [4] Install kali-linux-amd64 \n
 configfile ()/boot/grub/kali.lst
 
 
-title [4] Install little Linux \n
+title [5] Install little Linux \n
 configfile ()/boot/grub/littleLinux.lst
 
 
-title [5] start MAXDOS9 \n
+title [6] start MAXDOS9 \n
 configfile ()/boot/grub/max.lst
 
 
-title [7] Start winly \n 使用winly引导
+title [7] Start Clover \n 使用clover引导
+find --set-root /Clover.iso
+map --mem /Clover.iso (0xff)
+map --hook
+chainloader (0xff)
+
+
+title [8] Start winly \n 使用winly引导
 find --set-root /winly.iso
 map --mem /winly.iso (0xff)
 map --hook

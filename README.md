@@ -63,6 +63,11 @@ clover   : used in mac. (google or baidu for more)
 
 ---
 # ChangeLog
+
+## 20170614 - v1.2.3
+ - find iso-filename by RUN module
+ - add archlinux-boot entry
+ 
 ## 20170527 - v1.2.1
  - make file-tree bautiful
 
@@ -145,6 +150,10 @@ clover   : 用于(黑)苹果使用。
 
 ---
 # 日志
+## 20170614 - v1.2.3
+ - 使用RUN模块查找ISO文件名称
+ - 增加arch-linux安装
+ 
 ## 20170527 - v1.2.1
  * 让文件列表显示整齐
 

@@ -1,0 +1,18 @@
+find --set-root /BOOT/GRUB/submenu.lst
+
+title Return \n
+configfile ()/boot/grub/submenu.lst
+
+
+# 从ISO中启动Arch
+title install arch-linux live \n
+set showpath=1
+set showdir=0
+set slient=1
+command SISO RUN --noload --autolist-all show.iso subdir=1 /iso/arch/ --end exit
+set path=%filename%
+find --set-root %path%
+map %path% (0xff) || map --mem %path% (0xff)
+map --hook
+chainloader (0xff)
+

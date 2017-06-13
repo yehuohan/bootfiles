@@ -3,35 +3,45 @@ find --set-root /BOOT/GRUB/submenu.lst
 title Return \n
 configfile ()/boot/grub/submenu.lst
 
-# 命令行安装
-title Install kali
-find --set-root /install/vmlinuz
-kernel /install/vmlinuz mtrr vga=788
-initrd /install/initrd.gz
-
 # 图形界面方式安装
-title Installgui kali \n
-find --set-root /install/gtk/vmlinuz
-kernel /install/gtk/vmlinuz video=vesa:ywrap,mtrr vga=788
-initrd /install/gtk/initrd.gz
+title Install-gui kali \n
+set showpath=1
+set showdir=0
+set slient=1
+command SISO RUN --noload --autolist-all show.iso subdir=1 /iso/kali/ --end exit
+set path=%filename%
+find --set-root %path%
+kernel /iso/kali/install/gtk/vmlinuz video=vesa:ywrap,mtrr vga=788 findiso=%path%
+initrd /iso/kali/install/gtk/initrd.gz
 
 # u盘运行kali
 title Start kali live \n
-find --set-root /live/vmlinuz
-kernel /live/vmlinuz boot=live username=root hostname=kali
-initrd /live/initrd.img
+set showpath=1
+set showdir=0
+set slient=1
+command SISO RUN --noload --autolist-all show.iso subdir=1 /iso/kali/ --end exit
+set path=%filename%
+find --set-root %path%
+kernel /iso/kali/live/vmlinuz boot=live username=root hostname=kali locale=zh_CN.UTF-8 findiso=%path%
+initrd /iso/kali/live/initrd.img
 
 
-
-
-# 图形界面方式安装
-#title Installgui kali \n
-#find --set-root /iso/kali/kali-linux-2016.1-amd64.iso
-#kernel /iso/kali/vmlinuz video=vesa:ywrap,mtrr vga=788 findiso=/iso/kali/kali-linux-2016.1-amd64.iso
-#initrd /iso/kali/initrd.gz
-
-# u盘运行kali
+## 命令行安装
+#title Install kali \n
+#find --set-root /install/vmlinuz
+#kernel /install/vmlinuz mtrr vga=788
+#initrd /install/initrd.gz
+#
+## 图形界面方式安装
+#title Install-gui kali \n
+#find --set-root /install/gtk/vmlinuz
+#kernel /install/gtk/vmlinuz video=vesa:ywrap,mtrr vga=788
+#initrd /install/gtk/initrd.gz
+#
+## u盘运行kali
 #title Start kali live \n
-#find --set-root /iso/kali/kali-linux-2016.1-amd64.iso
-#kernel /iso/kali/vmlinuz boot=live username=root hostname=kali locale=zh_CN.UTF-8 findiso=/iso/kali/kali-linux-2016.1-amd64.iso
-#initrd /iso/kali/initrd.img
+#find --set-root /live/vmlinuz
+#kernel /live/vmlinuz boot=live username=root hostname=kali
+#initrd /live/initrd.img
+
+

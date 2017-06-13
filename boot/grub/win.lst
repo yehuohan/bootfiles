@@ -7,7 +7,7 @@ configfile ()/boot/grub/submenu.lst
 title Search and Boot ext_iso \n 从外置镜像(/ext_iso)启动安装程序
 set showpath=1
 set showdir=0
-#set slient=1
+#set slient=1 # 若使能此项，则不再手动选择ISO文件
 command SISO RUN --noload --autolist-all show.iso subdir=2 /ext_iso/ --end exit
 command SISO ISO=%fileroot%%filename% FDA=--UATA FDB=firax86 sif=y  boot=cd e820=3
 

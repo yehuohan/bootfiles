@@ -2,9 +2,10 @@
 # USBBootFils
 # Only track the files related to boot files.
 
-/iso/
+*.swp
+
 /tools/
 /MyDocument.exe
 /MyDocuments
 
-!/*.swp
+
