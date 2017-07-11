@@ -58,11 +58,14 @@ clover   : used in mac. (google or baidu for more)
 
 ---
 # Contributors
- * yehuohan, <yehuohan@gmail.com>
+ * yehuohan, yehuohan@gmail.com, 550034086@qq.com
 
 
 ---
 # ChangeLog
+
+## 20170711 - v1.2.5
+ - Change refind banner-png.
 
 ## 20170706 - v1.2.4
  - Change some icons of refind.
@@ -148,11 +151,14 @@ clover   : 用于(黑)苹果使用。
 
 ---
 # Contributors
- * yehuohna, <yehuohan@gmail.com>
+ * yehuohan, yehuohan@gmail.com, 550034086@qq.com
 
 
 ---
 # 日志
+
+## 20170711 - v1.2.5
+ - 更改refind背景图
 
 ## 20170706 - v1.2.4
  - 替换一些refind的图标
