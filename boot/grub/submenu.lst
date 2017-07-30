@@ -61,13 +61,6 @@ map --hook
 chainloader (0xff)
 
 
-title [8] Start winly \n 使用winly引导
-find --set-root /winly.iso
-map --mem /winly.iso (0xff)
-map --hook
-chainloader (0xff)
-
-
 title [R] Reboot \n 重启
 reboot
 
