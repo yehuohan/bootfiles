@@ -54,13 +54,6 @@ title [6] start MAXDOS9 \n
 configfile ()/boot/grub/max.lst
 
 
-title [7] Start Clover \n 使用clover引导
-find --set-root /Clover.iso
-map --mem /Clover.iso (0xff)
-map --hook
-chainloader (0xff)
-
-
 title [R] Reboot \n 重启
 reboot
 
