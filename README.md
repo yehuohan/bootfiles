@@ -23,7 +23,7 @@ clover   : 用于(黑)苹果使用。
 │       ├──*.lst                       : 菜单设置文件
 │       ├── MenuSetting                : 菜单配置文件
 │       ├── SISO                       : SISO工具模块
-│       ├── srs                        : 驱动文件
+│       └── srs                        : 驱动文件
 ├── cake.ico                           : u盘图标文件
 ├── EFI
 │   ├── boot
@@ -32,11 +32,19 @@ clover   : 用于(黑)苹果使用。
 │   │   ├── refind_x64.efi             : efi启动文件
 │   │   └── styles                     : 主题
 │   ├── CLOVER                         : CLOVER启动
-│   ├── tools                          : efi工具
+│   └── tools                          : efi工具
 ├── grldr, grldr.mbr, grub.exe         : grub4dos启动文件
 └── menu.lst                           : grub4dos菜单文件
 ```
 
+## 常用工具
+
+ - [BootICE：启动管理工具](http://www.ipauly.com/)
+ - [DiskGenius：分区工具](http://www.diskgenius.cn/)
+ - [gparted：分区工具(Linux)](https://gparted.org/)
+ - [OSFMount：挂载工具](https://www.osforensics.com/tools/mount-disk-images.html)
+ - [rEFInd：引导软件](http://www.rodsbooks.com/refind/)
+ - [grub4dos：引导软件](http://grub4dos.chenall.net/)
 
 ---
 ## 常见问题
@@ -48,7 +56,6 @@ clover   : 用于(黑)苹果使用。
 
  - 安装Windows时或者进入PE后，无法读取SSD
     使用AHCI模式，或者使用Intel RST驱动。
-
 
 ---
 ## Contributors
