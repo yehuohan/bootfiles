@@ -43,6 +43,7 @@ clover   : 用于(黑)苹果使用。
  - [DiskGenius：分区工具](http://www.diskgenius.cn/)
  - [gparted：分区工具(Linux)](https://gparted.org/)
  - [OSFMount：挂载工具](https://www.osforensics.com/tools/mount-disk-images.html)
+ - [WinNTSetup：Windows系统安装工具](http://www.winntsetup.com)
  - [rEFInd：引导软件](http://www.rodsbooks.com/refind/)
  - [grub4dos：引导软件](http://grub4dos.chenall.net/)
 
