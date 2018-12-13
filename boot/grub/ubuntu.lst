@@ -5,17 +5,17 @@ configfile ()/boot/grub/submenu.lst
 
 
 title Try Ubuntu without installing \n
-find --set-root /casper/vmlinuz.efi
-kernel /casper/vmlinuz.efi file=/preseed/ubuntu.seed boot=casper locale=zh_CN.UTF-8
+find --set-root /casper/vmlinuz
+kernel /casper/vmlinuz file=/preseed/ubuntu.seed boot=casper locale=zh_CN.UTF-8
 initrd /casper/initrd.lz
 
 
 title Install Ubuntu \n
-find --set-root /casper/vmlinuz.efi
-kernel /casper/vmlinuz.efi file=/preseed/ubuntu.seed boot=casper only-ubiquity
+find --set-root /casper/vmlinuz
+kernel /casper/vmlinuz file=/preseed/ubuntu.seed boot=casper only-ubiquity
 initrd /casper/initrd.lz
 
 
 # 若从iso启动，需要加参数 iso-scan/filename = &{iso_path}
-# kernel /iso/ubuntux64/vmlinuz.efi boot=casper iso-scan/filename=/iso/ubuntux64/ubuntu-16.04-desktop-amd64.iso locale=zh_CN.UTF-8
+# kernel /iso/ubuntux64/vmlinuz boot=casper iso-scan/filename=/iso/ubuntux64/ubuntu-16.04-desktop-amd64.iso locale=zh_CN.UTF-8
 
