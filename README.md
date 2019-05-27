@@ -60,5 +60,5 @@ clover   : 用于(黑)苹果使用。
 
 ---
 ## Contributors
- * yehuohan, yehuohan@gmail.com, 550034086@qq.com
+ * yehuohan, yehuohan@gmail.com, yehuohan@qq.com
 
