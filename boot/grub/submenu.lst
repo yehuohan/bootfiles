@@ -42,15 +42,11 @@ title [3] Install arch-linux \n
 configfile ()/boot/grub/arch.lst
 
 
-title [4] Install kali-linux-amd64 \n
-configfile ()/boot/grub/kali.lst
-
-
-title [5] Install little Linux \n
+title [4] Install little Linux \n
 configfile ()/boot/grub/littleLinux.lst
 
 
-title [6] start MAXDOS9 \n
+title [5] start MAXDOS9 \n
 configfile ()/boot/grub/max.lst
 
 

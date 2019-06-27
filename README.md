@@ -7,7 +7,6 @@
 ```
 grub4dos : 在mbr+bios下使用。
 refind   : 在gpt+uefi下使用，mbr+gpt也可以通过设置使用。
-clover   : 用于(黑)苹果使用。
 ```
 
 ---
@@ -31,11 +30,15 @@ clover   : 用于(黑)苹果使用。
 │   │   ├── refind.conf                : 配置文件
 │   │   ├── refind_x64.efi             : efi启动文件
 │   │   └── styles                     : 主题
-│   ├── CLOVER                         : CLOVER启动
 │   └── tools                          : efi工具
 ├── grldr, grldr.mbr, grub.exe         : grub4dos启动文件
 └── menu.lst                           : grub4dos菜单文件
 ```
+
+## 安装
+ - 主分区：放EFI和Grub4dos引导(使用BooICE写入)
+ - Ubuntu : 提取Ubuntu镜像的文件放入
+ - Wos : 放入misc/RamosPe的OS和PE的引导文件
 
 ## 常用工具
 
