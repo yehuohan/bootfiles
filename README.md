@@ -60,8 +60,3 @@ refind   : 在gpt+uefi下使用，mbr+gpt也可以通过设置使用。
 
  - 安装Windows时或者进入PE后，无法读取SSD
     使用AHCI模式，或者使用Intel RST驱动。
-
----
-## Contributors
- * yehuohan, yehuohan@gmail.com, yehuohan@qq.com
-
