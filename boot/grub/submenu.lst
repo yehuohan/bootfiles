@@ -34,7 +34,7 @@ title [1] Install windows \n 从(ISO)镜像启动Windows安装程序
 configfile ()/boot/grub/win.lst
 
 
-title [2] Install ubuntu18.04 Lts \n
+title [2] Install ubuntu lts \n
 configfile ()/boot/grub/ubuntu.lst
 
 
