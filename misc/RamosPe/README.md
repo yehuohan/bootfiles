@@ -18,7 +18,5 @@
  - /boot/.wim & .sdi
 ```
     * pe64.win & peboot.sdi        : windows PE5.1_x64
-    * ramosx86.win & winosboot.sdi : windows 8.1 RamOs_x86
-    * boot81.win & winosboot.sdi   : windows 8.1 setup
-    * boot10.win & winosboot.sdi   : windows 10 setup
+    * boot.win & boot.sdi          : windows setup
 ```
