@@ -1,3 +1,5 @@
+# 对于windows，grub4dos最多支持到win10，之后的不再维护，只使用EFI。
+
 find --set-root /BOOT/GRUB/submenu.lst
 
 title Return \n
