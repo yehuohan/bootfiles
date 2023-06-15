@@ -19,15 +19,15 @@ default 0
 
 ### titles
 
-title [0] Start Win81PE pure X86 \n 从(ISO)镜像启动PE
-find --set-root /iso/win8pe/Win81PePureX86.iso
-map /iso/win8pe/Win81PePureX86.iso (0xff) || map --mem /iso/win8pe/Win81PePureX86.iso (0xff)
+title [0] Start PE from ISO \n 从(ISO)镜像启动PE
+find --set-root /iso/PE.iso
+map /iso/PE.iso (0xff) || map --mem /iso/PE.iso (0xff)
 map --hook
 chainloader (0xff)
 
-title     Start WinOs and RamosPe \n 从分区wos中启动PE和Windows安装程序
-find --set-root /winosbootmgr
-chainloader /winosbootmgr
+title     Start PE from Wos \n 从分区wos中启动PE
+find --set-root /wosbootmgr
+chainloader /wosbootmgr
 
 
 title [1] Install windows \n 从(ISO)镜像启动Windows安装程序

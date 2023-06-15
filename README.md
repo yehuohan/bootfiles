@@ -37,8 +37,9 @@ refind   : 在gpt+uefi下使用，mbr+gpt也可以通过设置使用。
 
 ## 安装
  - 主分区：放EFI和Grub4dos引导(使用BooICE写入)
+ - Arch : 提取Arch Linux镜像的文件放入
  - Ubuntu : 提取Ubuntu镜像的文件放入
- - Wos : 放入misc/RamosPe的OS和PE的引导文件
+ - Wos : 提取[PE](https://www.wepe.com.cn/download.html)镜像的文件放入
 
 ## 常用工具
 
@@ -55,8 +56,17 @@ refind   : 在gpt+uefi下使用，mbr+gpt也可以通过设置使用。
  - bios没有启动项
     重设bios。
 
+ - 启动项无法正常加载
+    尝试关闭安全模式
+
  - 以UEFI方式安装其他系统
     将系统镜像解压到硬盘，在refind中添加相应启动项，启动参数参考镜像中的引导。
 
  - 安装Windows时或者进入PE后，无法读取SSD
     使用AHCI模式，或者使用Intel RST驱动。
+
+ - WinNTSetup布署正常，安装出现问题
+    确定EFI分区是否正常，正常会显示绿色图标（修改ESP分区会导致异常，例如重新显示、隐藏ESP分区等）
+
+ - 通过rEFInd引导Wos失败
+    直接通过Bios的“从EFI文件引导”加载
